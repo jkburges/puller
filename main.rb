@@ -24,6 +24,6 @@ client.org_repos(org).each do |repo|
 
     commentors = comments.map { |c| c.user.login }.uniq.sort
 
-    puts "#{project}, #{url}, #{updated_at}, #{comments.length}, #{commentors}"
+    puts "#{updated_at}, #{project}, #{url}, #{comments.length}, #{commentors}"
   end
 end
