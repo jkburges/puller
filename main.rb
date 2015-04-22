@@ -6,9 +6,24 @@ Octokit.auto_paginate = true
 
 client = Octokit::Client.new(:netrc => true)
 
-client.repos.each do |repo|
-    puts repo.name
-	puts repo.pulls
-end
+org = 'aodn'
 
-# client.org_repos('aodn').map { |r| client.pulls(r.id) }
+client.org_repos(org).each do |repo|
+
+  pulls = client.pulls(repo.full_name)
+
+  repo = Octokit::Repository.new(repo.full_name)
+
+  pulls.each do |pull|
+
+    project = repo.slug
+    url = pull.html_url
+    updated_at = pull.updated_at
+
+    comments = client.pull_comments(repo.slug, pull.number)
+
+    commentors = comments.map { |c| c.user.login }.uniq.sort
+
+    puts "#{project}, #{url}, #{updated_at}, #{comments.length}, #{commentors}"
+  end
+end
