@@ -1,4 +1,4 @@
-Example bash to get the pulls that I'm interested in:
+Example bash to get the pulls in which I'm interested:
 
 ```
 cat pulls | sort -r | grep "\[]" | egrep -v "jkburges$"
