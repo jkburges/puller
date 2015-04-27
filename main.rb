@@ -2,6 +2,7 @@
 
 require 'octokit'
 
+Octokit.auto_paginate = true
 @client = Octokit::Client.new(:netrc => true)
 
 org = 'aodn'
