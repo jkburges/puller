@@ -27,9 +27,10 @@ def print_stats(pull)
   comments = issue_comments.concat(review_comments).uniq
   commentors = comments.map { |c| c.user.login }.uniq.sort
 
-  puts ['created_at', 'merged_at', 'updated_at', 'project_name', 'url', 'author', 'state', 'merger', 'comments.length', 'commentors'].join ','
   puts [created_at, merged_at, updated_at, project_name, url, author, state, merger, comments.length, "#{commentors}"].join ', '
 end
+
+puts ['created_at', 'merged_at', 'updated_at', 'project_name', 'url', 'author', 'state', 'merger', 'comments.length', 'commentors'].join ','
 
 @client.org_repos(org).each do |repo|
 
