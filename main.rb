@@ -12,7 +12,10 @@ def print_stats(pull)
 
   project_name = pull.base.repo.full_name
   url = pull.html_url
+
+  created_at = pull.created_at
   updated_at = pull.updated_at
+  merged_at = pull.merged_at
 
   author = pull.user.login
   state = pull.state
@@ -24,7 +27,8 @@ def print_stats(pull)
   comments = issue_comments.concat(review_comments).uniq
   commentors = comments.map { |c| c.user.login }.uniq.sort
 
-  puts [updated_at, project_name, url, author, state, merger, comments.length, "#{commentors}"].join ', '
+  puts ['created_at', 'merged_at', 'updated_at', 'project_name', 'url', 'author', 'state', 'merger', 'comments.length', 'commentors'].join ','
+  puts [created_at, merged_at, updated_at, project_name, url, author, state, merger, comments.length, "#{commentors}"].join ', '
 end
 
 @client.org_repos(org).each do |repo|
